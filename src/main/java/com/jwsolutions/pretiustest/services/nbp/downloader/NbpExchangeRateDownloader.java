@@ -4,6 +4,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ import java.util.stream.Stream;
 /**
  * Downloads mid-day exchange rates from the NBP (National Polish Bank) API.
  */
+@Component
 public class NbpExchangeRateDownloader {
     private static final String BASE_URI = "http://api.nbp.pl/api/exchangerates/tables/";
     private final RestTemplate restTemplate = new RestTemplate();

@@ -15,8 +15,8 @@ public class NbpExchangeRateProvider implements ExchangeRatesProvider {
     private Map<String, BigDecimal> exchangeRates;
     private NbpExchangeRateDownloader dataDownloader;
 
-    public NbpExchangeRateProvider() {
-        this.dataDownloader = new NbpExchangeRateDownloader();
+    public NbpExchangeRateProvider(NbpExchangeRateDownloader nbpExchangeRateDownloader) {
+        this.dataDownloader = nbpExchangeRateDownloader;
         downloadExchangeRates();
     }
 
