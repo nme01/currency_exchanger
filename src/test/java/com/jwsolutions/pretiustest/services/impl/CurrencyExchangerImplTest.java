@@ -13,6 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -60,5 +61,13 @@ public class CurrencyExchangerImplTest {
         BigDecimal expectedResult = new BigDecimal("26.39");
 
         assertEquals(0, expectedResult.compareTo(actualResult));  // using compareTo to ignore the differences in scale
+    }
+
+    @Test
+    @DisplayName("Should throw an exception when nonexistent currency is used")
+    public void exchangeToNonExistentCurrency() {
+        assertThrows(CurrencyExchangeException.class,
+            () -> currencyExchanger.exchangeMoney(new BigDecimal("100.0"), "PLN", "TEST")
+        );
     }
 }
