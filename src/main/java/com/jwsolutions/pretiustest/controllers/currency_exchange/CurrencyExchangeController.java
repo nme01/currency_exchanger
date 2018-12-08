@@ -1,5 +1,6 @@
 package com.jwsolutions.pretiustest.controllers.currency_exchange;
 
+import com.jwsolutions.pretiustest.services.CurrencyExchangeException;
 import com.jwsolutions.pretiustest.services.CurrencyExchanger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,12 @@ public class CurrencyExchangeController {
                                                @RequestParam("sourceCurrency") String sourceCurrency,
                                                @RequestParam("targetCurrency") String targetCurrency) {
         BigDecimal sourceAmount = new BigDecimal(amount);
-        BigDecimal targetAmount = currencyExchanger.exchangeMoney(sourceAmount, sourceCurrency, targetCurrency);
+        BigDecimal targetAmount;
+        try {
+            targetAmount = currencyExchanger.exchangeMoney(sourceAmount, sourceCurrency, targetCurrency);
+        } catch (CurrencyExchangeException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
         if (targetAmount != null) {
             targetAmount = targetAmount.setScale(scale, RoundingMode.HALF_UP);

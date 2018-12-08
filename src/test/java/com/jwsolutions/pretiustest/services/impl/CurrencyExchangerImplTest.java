@@ -1,5 +1,6 @@
 package com.jwsolutions.pretiustest.services.impl;
 
+import com.jwsolutions.pretiustest.services.CurrencyExchangeException;
 import com.jwsolutions.pretiustest.services.ExchangeRatesProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,7 +32,7 @@ public class CurrencyExchangerImplTest {
 
     @Test
     @DisplayName("For same currency original amount should be returned")
-    public void exchangeWithTheSameSourceAndTargetCurrency() {
+    public void exchangeWithTheSameSourceAndTargetCurrency() throws CurrencyExchangeException {
         BigDecimal actualResult = currencyExchanger.exchangeMoney(new BigDecimal("100.0"), "PLN", "PLN");
         BigDecimal expectedResult = new BigDecimal("100.0");
 
@@ -45,7 +46,7 @@ public class CurrencyExchangerImplTest {
 
     @Test
     @DisplayName("100 CHF should be equal to 379 PLN")
-    public void exchangeChfToPln() {
+    public void exchangeChfToPln() throws CurrencyExchangeException {
         BigDecimal actualResult = currencyExchanger.exchangeMoney(new BigDecimal("100.0"), "CHF", "PLN");
         BigDecimal expectedResult = new BigDecimal("379.0000");
 
@@ -54,7 +55,7 @@ public class CurrencyExchangerImplTest {
 
     @Test
     @DisplayName("100 PLN should be equal to 26.39 PLN")
-    public void exchangePlnToChf() {
+    public void exchangePlnToChf() throws CurrencyExchangeException  {
         BigDecimal actualResult = currencyExchanger.exchangeMoney(new BigDecimal("100.0"), "PLN", "CHF");
         BigDecimal expectedResult = new BigDecimal("26.39");
 

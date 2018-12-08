@@ -25,6 +25,10 @@ public class NbpExchangeRateProvider implements ExchangeRatesProvider {
         BigDecimal sourceCurrencyRate = exchangeRates.get(sourceCurrency);
         BigDecimal destinationCurrencyRate = exchangeRates.get(targetCurrency);
 
+        if (sourceCurrencyRate == null || destinationCurrencyRate == null) {
+            return null;
+        }
+
         BigDecimal exchangeRate = sourceCurrencyRate.divide(destinationCurrencyRate, RoundingMode.HALF_UP);
         return exchangeRate;
     }
