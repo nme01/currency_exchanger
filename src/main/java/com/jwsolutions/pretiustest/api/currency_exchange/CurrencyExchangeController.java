@@ -1,4 +1,4 @@
-package com.jwsolutions.pretiustest.controllers.currency_exchange;
+package com.jwsolutions.pretiustest.api.currency_exchange;
 
 import com.jwsolutions.pretiustest.services.CurrencyExchangeException;
 import com.jwsolutions.pretiustest.services.CurrencyExchanger;
