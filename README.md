@@ -2,7 +2,7 @@
 Server providing REST API for currency exchanging.
 
 ## Building
-TODO
+To run the application navigate to the root directory of the project and run ./gradlew build
 
 ## Running
-TODO
+To run the application navigate to the root directory of the project and run ./gradlew bootRun
