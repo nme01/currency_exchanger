@@ -1,6 +1,7 @@
 package com.jwsolutions.pretiustest.controllers.currency_exchange;
 
 import com.jwsolutions.pretiustest.services.CurrencyExchanger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,8 @@ import java.math.RoundingMode;
  */
 @RestController
 public class CurrencyExchangeController {
+    @Value("${currency-exchanger.scale}")
+    private int scale;
 
     private CurrencyExchanger currencyExchanger;
 
@@ -30,7 +33,7 @@ public class CurrencyExchangeController {
         BigDecimal targetAmount = currencyExchanger.exchangeMoney(sourceAmount, sourceCurrency, targetCurrency);
 
         if (targetAmount != null) {
-            targetAmount = targetAmount.setScale(4, RoundingMode.HALF_UP);
+            targetAmount = targetAmount.setScale(scale, RoundingMode.HALF_UP);
             return new ResponseEntity<>(targetAmount, HttpStatus.OK);
         }
 
