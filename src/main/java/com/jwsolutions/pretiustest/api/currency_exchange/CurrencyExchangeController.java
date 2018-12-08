@@ -17,6 +17,8 @@ import java.math.RoundingMode;
  */
 @RestController
 public class CurrencyExchangeController {
+    public static final String EXCHANGE_URI = "/exchange";
+
     @Value("${currency-exchanger.scale}")
     private int scale;
 
@@ -26,7 +28,7 @@ public class CurrencyExchangeController {
         this.currencyExchanger = currencyExchanger;
     }
 
-    @GetMapping("/exchange")
+    @GetMapping(EXCHANGE_URI)
     public ResponseEntity<BigDecimal> exchange(@RequestParam("amount") String amount,
                                                @RequestParam("sourceCurrency") String sourceCurrency,
                                                @RequestParam("targetCurrency") String targetCurrency) {
