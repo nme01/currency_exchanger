@@ -30,6 +30,12 @@ targetCompatibility = 1.8
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
 
-    testImplementation("junit:junit")
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.3.1"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:5.3.1"
+}
+
+test {
+    useJUnitPlatform()
 }
