@@ -1,2 +1,8 @@
-# currency_exchanger
-Server for currency exchanging
+# Currency exchanger
+Server providing REST API for currency exchanging.
+
+## Building
+TODO
+
+## Running
+TODO
