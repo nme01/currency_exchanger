@@ -29,7 +29,7 @@ public class NbpExchangeRateProvider implements ExchangeRatesProvider {
         return exchangeRate;
     }
 
-    @Scheduled()
+    @Scheduled(cron = "* 20 12 ? * MON-FRI")  // just after NBP updates the mid day exchange rates (12:20 working days)
     private void downloadExchangeRates() {
         this.exchangeRates = dataDownloader.downloadExchangeRatesForPLN();
     }
