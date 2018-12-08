@@ -28,6 +28,8 @@ public class NbpExchangeRateDownloader {
             Stream.concat(exchangableCurrenciesRates.stream(), nonexchangableCurrenciesRates.stream())
                 .collect(Collectors.toMap(NbpRate::getCode, nbpRate -> new BigDecimal(nbpRate.getMid())));
 
+        exchangeRatesForPLN.put("PLN", BigDecimal.ONE);
+
         return exchangeRatesForPLN;
     }
 
