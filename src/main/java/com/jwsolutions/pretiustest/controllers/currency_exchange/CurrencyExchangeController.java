@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Rest controller providing endpoints for exchanging currencies using NBP currency data.
@@ -28,6 +29,12 @@ public class CurrencyExchangeController {
         BigDecimal sourceAmount = new BigDecimal(amount);
         BigDecimal targetAmount = currencyExchanger.exchangeMoney(sourceAmount, sourceCurrency, targetCurrency);
 
-        return new ResponseEntity<>(targetAmount, HttpStatus.OK);
+        if (targetAmount != null) {
+            targetAmount = targetAmount.setScale(4, RoundingMode.HALF_UP);
+            return new ResponseEntity<>(targetAmount, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
     }
 }
